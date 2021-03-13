@@ -5,8 +5,13 @@ class Application
     resp = Rack::Response.new
 
     if req.path.match(/items/)
-      item = req.path.split("/items/").last
-      binding.pry
+      search_item = req.path.split("/items/").last
+      item = @@items.find {|item| item.name == search_item}
+      if item
+      else
+        resp.status = 400
+        resp.write "That item is not in our inventory."
+      end
     else
       resp.status = 404
     end
