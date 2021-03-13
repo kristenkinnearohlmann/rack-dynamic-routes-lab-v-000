@@ -10,7 +10,7 @@ class Application
       if item
       else
         resp.status = 400
-        resp.write "That item is not in our inventory."
+        resp.write "Item not found"
       end
     else
       resp.status = 404
